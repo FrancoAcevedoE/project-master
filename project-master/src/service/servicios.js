@@ -1,4 +1,3 @@
-// service/servicios.js
 import axios from "axios";
 
 const clienteAPI = axios.create({

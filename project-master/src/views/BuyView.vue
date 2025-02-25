@@ -137,15 +137,15 @@ async submitTransaction() {
 
   const transaction = {
   user_id: String(localStorage.getItem("userId")),  
-  action: "sale",  // Asegurarnos de que sea "sale" según la documentación
-  crypto_code: this.selectedCrypto.toLowerCase(), // Asegurar que sea en minúsculas
-  crypto_amount: amount.toFixed(2), // Asegurar que sea string con dos decimales
-  money: price.toFixed(2),  // Asegurar que sea string con dos decimales
-  datetime: formattedDate.replace(/\//g, "-") // Formato correcto de fecha
+  action: "sale", 
+  crypto_code: this.selectedCrypto.toLowerCase(),
+  crypto_amount: amount.toFixed(2), 
+  money: price.toFixed(2),  
+  datetime: formattedDate.replace(/\//g, "-") 
 };
 
 
-console.log("Datos enviados a la API:", JSON.stringify(transaction, null, 2)); // Verifica la estructura
+console.log("Datos enviados a la API:", JSON.stringify(transaction, null, 2));
 
   try {
     const response = await servicios.postTransaccion(
@@ -162,7 +162,7 @@ console.log("Datos enviados a la API:", JSON.stringify(transaction, null, 2)); /
       alert("Transacción guardada exitosamente");
       console.log("Datos enviados a la API:", JSON.stringify(transaction, null, 2));
 
-      // 📌 Guardar en localStorage
+      // Guarda en el localStorage
       let history = JSON.parse(localStorage.getItem("transactionHistory")) || [];
       history.push(transaction);
 
@@ -195,7 +195,7 @@ console.log("Datos enviados a la API:", JSON.stringify(transaction, null, 2)); /
   if (error.response) {
     console.error("Detalles del error de la API:", error.response.data);
   } else {
-    console.error("Error al enviar transacción a la API:", error);
+    console.error("Error al enviar los datos de la transacción a la API:", error);
   }
   alert("Hubo un problema al guardar la transacción.");
 }

@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     handleLogin() {
-  const userIdString = String(this.userId).trim(); // Convertimos a string y aplicamos trim
+  const userIdString = String(this.userId).trim();
   if (userIdString >0 && userIdString !== "") {
     this.$store.dispatch("login", userIdString); 
     this.$emit("login-success");
@@ -56,7 +56,7 @@ form button {
 form button:hover {
   background-color: #c0392b;
 }
-/* Estilos del formulario */
+
 .login {
   display: flex;
   background-color: #4ecdc4;

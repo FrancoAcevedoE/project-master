@@ -13,9 +13,8 @@
   </script>
   
   <style>
-  /* Estilo para la imagen de fondo */
   .bg-image {
-    position: fixed; /* Asegura que cubra toda la pantalla */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;

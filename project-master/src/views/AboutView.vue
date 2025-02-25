@@ -46,12 +46,12 @@ export default {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 1px 1px 10px 1px #d7d7d78c;
-  max-width: 600px; /* Ajusta según necesidad */
+  max-width: 600px; 
   margin: auto;
 }
 
 .transaction-list {
-  max-height: 300px; /* Ajusta la altura según necesidad */
+  max-height: 300px;
   overflow-y: auto;
   background: rgb(255, 255, 255);
   padding: 10px;

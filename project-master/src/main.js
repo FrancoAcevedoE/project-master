@@ -9,7 +9,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 const app = createApp(App);
 
-// Usa tanto el enrutador como el almacenamiento Vuex en la aplicación
 app.use(router);
 app.use(store);
 app.mount('#app');

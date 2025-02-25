@@ -11,7 +11,7 @@
         <button class="button" @click="logout">Cerrar sesión</button>
       </nav>
 
-      <router-view></router-view> <!-- Aquí se renderizan las vistas internas -->
+      <router-view></router-view> 
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   components: { LoginForm },
   data() {
     return {
-      loggedIn: !!localStorage.getItem("userId"), // Estado reactivo
+      loggedIn: !!localStorage.getItem("userId"), // Inicializa la variable reactiva
     };
   },
   methods: {
@@ -77,8 +77,8 @@ button:hover {
   background-color: #6a1b9a;
 }
 nav a:link, nav a:visited {
-  text-decoration: none; /* Elimina el subrayado */
-  color: #ffffff; /* Asegura que tenga color */
+  text-decoration: none;
+  color: #ffffff;
   padding: 5px;
   margin: 5px;
   border-radius: 20px;

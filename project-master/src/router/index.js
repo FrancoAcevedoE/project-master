@@ -20,7 +20,6 @@ const router = createRouter({
   routes,
 });
 
-// Si la ruta requiere autenticación y no hay userId, redirige al login
 router.beforeEach((to, from, next) => {
   const isLoggedIn = !!localStorage.getItem("userId");
   if (to.meta.requiresAuth && !isLoggedIn) {
