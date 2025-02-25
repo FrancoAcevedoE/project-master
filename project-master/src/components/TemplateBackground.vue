@@ -23,6 +23,8 @@
     background-color: #f7fff7;
     background-position: center;
     z-index: -1; /* Mantiene el fondo detrás */
+    background-size: cover;
+    background-size:repeat;
   }
   
   /* Contenedor del contenido principal */
@@ -37,5 +39,6 @@
     height: 100vh;
     color: white;
   }
+  
   </style>
   

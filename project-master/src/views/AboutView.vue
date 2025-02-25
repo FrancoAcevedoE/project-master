@@ -32,3 +32,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.about {
+  background-color: #4ecdc4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px #d7d7d78c;
+}
+</style>

@@ -40,6 +40,7 @@ export default {
 </script>
 
 <style>
+
 .container-fluid{
   display: flex;
   justify-content: center;

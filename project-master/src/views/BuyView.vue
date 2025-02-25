@@ -168,6 +168,7 @@ export default {
 </script>
 
 <style>
+
 .transaction-type {
   display: flex;
   justify-content: center;
