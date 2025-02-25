@@ -166,3 +166,97 @@ export default {
   },
 };
 </script>
+
+<style>
+.transaction-type {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.transaction-type .button {
+  margin: 5px;
+  padding: 20px;
+}
+.walletCoin {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.walletCoin input {
+  width: 250px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 590px;  
+  box-shadow: 0 5px 5px rgba(203, 34, 34, 0.2);
+}
+.cryptoBalance {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  box-shadow: 0 5px 5px rgba(203, 34, 34, 0.2);
+}
+.cryptoBalance input {
+  width: 250px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;  
+  box-shadow: 0 5px 5px rgba(203, 34, 34, 0.2);
+}
+.crypto-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;  
+}
+.crypto-form button {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  box-shadow: 0 5px 5px rgba(203, 34, 34, 0.2);
+  cursor: pointer;
+}
+
+.crypto-form button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 5px 5px rgba(203, 34, 34, 0.2);
+}
+
+ .form-group .input {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 590px;  
+  box-shadow: 0 5px 5px rgba(203, 34, 34, 0.2);
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.form-group select {
+  width: 250px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 590px;  
+  box-shadow: 0 5px 5px rgba(203, 34, 34, 0.2);
+}
+.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.form-group input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 590px;  
+  box-shadow: 0 5px 5px rgba(203, 34, 34, 0.2);
+}
+
+</style>

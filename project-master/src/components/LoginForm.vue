@@ -18,9 +18,11 @@ export default {
   methods: {
     handleLogin() {
   const userIdString = String(this.userId).trim(); // Convertimos a string y aplicamos trim
-  if (userIdString !== "") {
+  if (userIdString >0 && userIdString !== "") {
     this.$store.dispatch("login", userIdString); 
     this.$emit("login-success");
+  }else if (userIdString <=0 || userIdString == ""){
+    alert("Ingrese un ID mayor a 0");
   }
 },
   },
@@ -36,6 +38,24 @@ export default {
   text-align: center;
 }
 
+form input{
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 590px;
+  border: 1px solid #ccc;
+}
+form button {
+  width: 120px;
+  padding: 10px;
+  border-radius: 590px;
+  border: none;
+  background-color: #e74c3c;
+  color: white;
+}
+form button:hover {
+  background-color: #c0392b;
+}
 /* Estilos del formulario */
 .login {
   display: flex;
@@ -47,6 +67,7 @@ export default {
 
 button {
   color: white;
+  
   background-color: #e74c3c;
 }
 

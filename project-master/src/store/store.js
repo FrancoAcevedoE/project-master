@@ -4,6 +4,7 @@ import CryptoJS from 'crypto-js';
 
 const store = createStore({
   state() {
+
     return {
       userId: null, // Este es el estado para guardar el ID del usuario
       secretKey: 'mi_clave_secreta', // Cambiar por una clave más segura
