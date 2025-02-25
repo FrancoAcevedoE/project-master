@@ -46,7 +46,8 @@
 </template>
 
 <script>
-import servicios from "@/service/price";
+import servicios from "@/service/servicios";  // Para las transacciones
+import precios from "@/service/price";       // Para obtener precios
 
 export default {
   name: "BuyView",
@@ -92,7 +93,8 @@ export default {
   this.error = null;
 
   try {
-    const response = await servicios.getPrecios(this.selectedCrypto, 1, "binance");
+    const response = await precios.getPrecios(this.selectedCrypto, 1, "binance");
+
 
     const price = response.data.binance.totalAsk || response.data.binance.totalAsk  || 0;
     if (price > 0) {
@@ -115,54 +117,97 @@ export default {
   }
 },
 
-   async submitTransaction() {
-      if (!this.selectedCrypto || !this.amount || this.amount <= 0 || !this.cryptoPrice) {
-        alert("Ingrese una cantidad válida y asegúrese de que el precio esté cargado.");
-        return;
+async submitTransaction() {
+  if (!this.selectedCrypto || !this.amount || this.amount <= 0 || !this.cryptoPrice) {
+    alert("Ingrese una cantidad válida y asegúrese de que el precio esté cargado.");
+    return;
+  }
+
+  const amount = parseFloat(this.amount);
+  const price = this.cryptoPrice;
+  const now = new Date();
+  const formattedDate = now.toLocaleString("es-AR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+
+  const transaction = {
+  user_id: String(localStorage.getItem("userId")),  
+  action: "sale",  // Asegurarnos de que sea "sale" según la documentación
+  crypto_code: this.selectedCrypto.toLowerCase(), // Asegurar que sea en minúsculas
+  crypto_amount: amount.toFixed(2), // Asegurar que sea string con dos decimales
+  money: price.toFixed(2),  // Asegurar que sea string con dos decimales
+  datetime: formattedDate.replace(/\//g, "-") // Formato correcto de fecha
+};
+
+
+console.log("Datos enviados a la API:", JSON.stringify(transaction, null, 2)); // Verifica la estructura
+
+  try {
+    const response = await servicios.postTransaccion(
+      transaction.user_id,
+      transaction.action,
+      transaction.crypto_code,
+      transaction.crypto_amount,
+      transaction.money,
+      transaction.datetime
+    );
+
+    console.log("Respuesta de la API:", response);
+    if (response && response.status === 201) {
+      alert("Transacción guardada exitosamente");
+      console.log("Datos enviados a la API:", JSON.stringify(transaction, null, 2));
+
+      // 📌 Guardar en localStorage
+      let history = JSON.parse(localStorage.getItem("transactionHistory")) || [];
+      history.push(transaction);
+
+      let balances = JSON.parse(localStorage.getItem("cryptoBalances")) || {};
+      if (!balances[this.selectedCrypto]) {
+        balances[this.selectedCrypto] = 0;
       }
-      if (!this.selectedCrypto || isNaN(this.amount) || this.amount <= 0 || !this.cryptoPrice) {
-  alert("Ingrese una cantidad válida y asegúrese de que el precio esté cargado.");
-  return;
+      if (this.transactionType === "buy") {
+        balances[this.selectedCrypto] += amount; // Sumar si es compra
+      } else if (this.transactionType === "sell") {
+        balances[this.selectedCrypto] -= amount; // Restar si es venta
+      }
+      localStorage.setItem("cryptoBalances", JSON.stringify(balances));
+
+      
+      localStorage.setItem("transactionHistory", JSON.stringify(history));
+    } else {
+      console.log("Datos enviados:", {
+  user_id: transaction.user_id,
+  action: transaction.action,
+  crypto_code: transaction.crypto_code,
+  crypto_amount: transaction.crypto_amount,
+  money: transaction.money,
+  datetime: transaction.datetime
+});
+
+      alert("Error al guardar la transacción.");
+    }
+  } catch (error) {
+  if (error.response) {
+    console.error("Detalles del error de la API:", error.response.data);
+  } else {
+    console.error("Error al enviar transacción a la API:", error);
+  }
+  alert("Hubo un problema al guardar la transacción.");
 }
 
-      const amount = parseFloat(this.amount);
-      const price = this.cryptoPrice;
-      const now = new Date();
-      const formattedDate = now.toLocaleString("es-AR", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      });
-
-      const transaction = {
-        user_id: localStorage.getItem("userId"),
-        action: this.transactionType === "buy" ? "purchase" : "sell",
-        crypto_code: this.selectedCrypto,
-        crypto_amount: amount.toFixed(2),
-        money: price.toFixed(2),
-        datetime: formattedDate,
-      };
-      console.log("prueba de post:", transaction);
-
-      try {
-        const response = await servicios.saveTransaction(transaction);
-        if (response && response.status === 201) {
-          alert("Transacción guardada exitosamente");
-        } else {
-          alert("Error al guardar la transacción.");
-        }
-      } catch (error) {
-        console.error("Error al enviar transacción a la API:", error);
-        console.log("prueba de post:", transaction);
-        alert("Hubo un problema al guardar la transacción.");
-      }
-    }
+},
   },
   mounted() {
     this.fetchCryptos();
+    const storedBalances = localStorage.getItem("cryptoBalances");
+  if (storedBalances) {
+    this.cryptoBalances = JSON.parse(storedBalances);
+  }
   },
 };
 </script>
