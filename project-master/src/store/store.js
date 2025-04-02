@@ -7,7 +7,6 @@ const store = createStore({
 
     return {
       userId: null, // Este es el estado para guardar el ID del usuario
-      secretKey: 'mi_clave_secreta', // Cambiar por una clave más segura
     };
   },
   mutations: {
@@ -17,7 +16,7 @@ const store = createStore({
   },
   actions: {
     login({ commit }, userId) {
-      const encryptedUserId = CryptoJS.AES.encrypt(userId, this.state.secretKey).toString();
+      const encryptedUserId = CryptoJS.SHA256(userId).toString();
       localStorage.setItem('userId', encryptedUserId); // Guardar en localStorage
       commit('setUserId', encryptedUserId); // Establecer en el estado de Vuex
     },
@@ -26,18 +25,14 @@ const store = createStore({
       commit('setUserId', null); // Limpiar el estado de Vuex
     },
     loadUserId({ commit }) {
-      const encryptedUserId = localStorage.getItem('userId');
-      if (encryptedUserId) {
-        const bytes = CryptoJS.AES.decrypt(encryptedUserId, this.state.secretKey);
-        const decryptedUserId = bytes.toString(CryptoJS.enc.Utf8);
-        commit('setUserId', decryptedUserId); // Establecer el usuario desencriptado
+      const storedUserId = localStorage.getItem('userId');
+      if (storedUserId) {
+        commit('setUserId', storedUserId);
       }
     },
   },
   getters: {
-    getUserId: (state) => {
-      return state.userId;
-    },
+    getUserId: (state) => state.userId,
   },
 });
 

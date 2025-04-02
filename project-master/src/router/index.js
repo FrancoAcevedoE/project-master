@@ -10,7 +10,7 @@ const routes = [
     children: [
       { path: "", redirect: "comprar" },
       { path: "comprar", name: "comprar", component: BuyView },
-      { path: "historial", name: "historial", component: AboutView }
+      { path: "historial", name: "historial", component: AboutView },
     ]
   }
 ];

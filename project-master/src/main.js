@@ -8,8 +8,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 
 const app = createApp(App);
-
+//const cors = require('cors');
 app.use(router);
 app.use(store);
+//app.use(cors());
 app.mount('#app');
 
