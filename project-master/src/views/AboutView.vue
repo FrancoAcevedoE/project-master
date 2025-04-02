@@ -41,9 +41,6 @@ export default {
         return;
       }
 
-      //const apiKey = '60eb09146661365596af552f'; // Reemplaza 'YOUR_API_KEY' con tu clave de API real
-      //const endpoint = `https://laboratorio3-f36a.restdb.io/rest/transactions?q={"user_id": "${this.userId}"}`;
-
       try {
         const response = await servicios.getTransaccion(this.userId);
         if (response.status !== 200) {

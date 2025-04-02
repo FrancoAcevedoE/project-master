@@ -126,14 +126,7 @@ async submitTransaction() {
   const amount = parseFloat(this.amount);
   const price = this.cryptoPrice;
   const now = new Date();
-  const formattedDate = now.toLocaleString("es-AR", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
+  const formattedDate = now.toISOString(); 
 
   const transaction = {
   user_id: String(localStorage.getItem("userId")),  
@@ -141,7 +134,7 @@ async submitTransaction() {
   crypto_code: this.selectedCrypto.toLowerCase(),
   crypto_amount: amount.toFixed(2), 
   money: price.toFixed(2),  
-  datetime: formattedDate.replace(/\//g, "-") 
+  datetime: formattedDate,
 };
 
 
